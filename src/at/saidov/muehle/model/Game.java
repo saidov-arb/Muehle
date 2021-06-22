@@ -8,7 +8,11 @@ public class Game
     /**♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦
      * Autor: Arbi Saidov
      * Datum: 21.06.2021
-     * Beschreibung:
+     * Beschreibung: Klasse Game
+     *          Im ControllerGame soll nur ein Objekt dieser Klasse
+     *          erstellt werden und das ganze Spiel auf diesem
+     *          einen Objekt laufen.
+     *          Gemäß MVC natürlich!!!
      ♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦*/
 
     private Player[] players = new Player[2];

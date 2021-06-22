@@ -9,7 +9,7 @@ public class Board
     /**♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦
      * Autor: Arbi Saidov
      * Datum: 21.06.2021
-     * Beschreibung:
+     * Beschreibung: Klasse Board
      *          Codes im Feld:
      *              0       =       Frei
      *              1       =       Spieler 1

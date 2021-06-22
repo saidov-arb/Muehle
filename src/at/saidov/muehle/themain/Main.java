@@ -28,10 +28,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-//        Parent root = FXMLLoader.load(getClass().getResource("../viewcontrol/Game.fxml"));
-//        primaryStage.setTitle("Muehle van Saidov");
-//        primaryStage.setScene(new Scene(root, 1000, 600));
-//        primaryStage.show();
+        Parent root = FXMLLoader.load(getClass().getResource("../viewcontrol/Game.fxml"));
+        primaryStage.setTitle("Muehle van Saidov");
+        primaryStage.setScene(new Scene(root, 1000, 600));
+        primaryStage.show();
     }
 
 
@@ -76,7 +76,6 @@ public class Main extends Application {
         iGame.placeStone(3,6);
         iGame.updatePlayerCounter();
 
-//        iGame.moveStone(3,0,3,1);
         iGame.moveStone(0,3,1,3);
 
 
@@ -88,6 +87,6 @@ public class Main extends Application {
 
 
 
-//        launch(args);
+        launch(args);
     }
 }
