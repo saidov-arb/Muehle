@@ -1,0 +1,16 @@
+.headerLabel{
+    -fx-font: 4em "Ink Free";
+    -fx-padding: 1em 0em 2.5em 2.5em;
+}
+
+.clickableLabel{
+    -fx-font: 3em "Ink Free";
+    -fx-padding: 0em 0em 0em 5em;
+}
+
+.clickableLabel:hover{
+    -fx-padding: 0em 0em 0em 7em;
+    -fx-text-fill: rgb(0, 0, 255);
+    -fx-border-width: 0em 0em 0em 1em;
+    -fx-border-style: hidden hidden hidden solid;
+}

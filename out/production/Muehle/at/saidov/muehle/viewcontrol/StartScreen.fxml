@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.saidov.muehle.viewcontrol.ControllerStartScreen">
+   <children>
+      <HBox fx:id="hbox_start" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: lightgrey;" stylesheets="@../design/DesignStartScreen.css">
+         <children>
+            <VBox fx:id="vbox_startmenu" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="500.0">
+               <children>
+                  <Label fx:id="lbl_menuheader" styleClass="headerLabel" text="Mühle van Saidov" />
+                  <Label fx:id="lbl_menucontinue" minWidth="-Infinity" prefWidth="300.0" styleClass="clickableLabel" text="Continue" />
+                  <Label fx:id="lbl_menunewgame" minWidth="-Infinity" prefWidth="300.0" styleClass="clickableLabel" text="New Game" />
+                  <Label fx:id="lbl_menuscoreboard" minWidth="-Infinity" prefWidth="300.0" styleClass="clickableLabel" text="Score Board" />
+                  <Label fx:id="lbl_menurules" minWidth="-Infinity" prefWidth="300.0" styleClass="clickableLabel" text="Rules" />
+                  <Label fx:id="lbl_menusettings" minWidth="-Infinity" onMouseClicked="#clickDings" prefWidth="300.0" styleClass="clickableLabel" text="Settings" />
+                  <Label fx:id="lbl_menuexit" minWidth="-Infinity" prefWidth="300.0" styleClass="clickableLabel" text="Exit" />
+               </children>
+            </VBox>
+            <VBox fx:id="vbox_startmedia" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="500.0">
+               <children>
+                  <MediaView fitHeight="200.0" fitWidth="200.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
