@@ -131,7 +131,7 @@ public class Game
     public void takeStone(int x, int y)
     {
         if (getBoard().checkForStone(x,y)){
-            if (!checkIfMillClosed(x,y))
+            if (!checkIfMillClosed(x,y) || !checkIfSingleStoneAvailable())
             {
                 getBoard().removeStone(x, y);
             }else {
@@ -197,6 +197,24 @@ public class Game
 //        }
 //        System.out.println("\n\n\n");
 
+        return false;
+    }
+
+    public boolean checkIfSingleStoneAvailable()
+    {
+        for (int i = 0; i < Board.FIELDSIZE; i++)
+        {
+            for (int j = 0; j < Board.FIELDSIZE; j++)
+            {
+                if (getBoard().checkForStone(j,i))
+                {
+                    if (!checkIfMillClosed(j,i))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 

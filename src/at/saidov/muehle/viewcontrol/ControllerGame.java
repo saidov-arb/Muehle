@@ -8,10 +8,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ControllerGame implements Initializable
@@ -48,7 +52,7 @@ public class ControllerGame implements Initializable
             btn_gamebuttons[i] = new Button();
             btn_gamebuttons[i].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             btn_gamebuttons[i].setFont(new Font("Consolas", 36));
-            btn_gamebuttons[i].setText("O");
+            btn_gamebuttons[i].setText("○");
             btn_gamebuttons[i].setOnAction(this::clickOnFieldToPlace);
             btn_gamebuttons[i].setBorder(null);
             btn_gamebuttons[i].setBackground(null);
@@ -72,9 +76,9 @@ public class ControllerGame implements Initializable
             }
         }
 
-        for (int i = 0; i < btn_gamebuttons.length; i++)
+        for (Button btn_gamebutton : btn_gamebuttons)
         {
-            System.out.println(btn_gamebuttons[i].getId());
+            System.out.println(btn_gamebutton.getId());
         }
     }
 
@@ -94,8 +98,30 @@ public class ControllerGame implements Initializable
         int y = Integer.parseInt(iButton.getId().substring(2));
 
 
-        zisGame.placeStone(x,y);
+        if (zisGame.getPlayers()[0].getStones() > 0 || zisGame.getPlayers()[1].getStones() > 0)
+        {
+            if (zisGame.getBoard().checkForSpace(x, y))
+            {
+                zisGame.placeStone(x, y);
 
+
+                //Wenn gerade eine Mühle geschlossen wurde, soll der Spieler die Rechte kriegen, einen Stein vom
+                //Gegner einzusammeln.
+                if (zisGame.checkIfMillClosed(x, y) && zisGame.checkIfSingleStoneAvailable())
+                {
+                    changeButtonAction("take");
+                } else
+                {
+                    zisGame.updatePlayerCounter();
+                }
+            }
+        } else
+        {
+            changeButtonAction("move");
+        }
+
+
+        //Aktualisiert werden soll immer.
         updateButtons();
         updateStatusbar();
     }
@@ -106,6 +132,8 @@ public class ControllerGame implements Initializable
     //Bei geschlossenen Mühlen wird ignoriert.
     //Bei eigenen Steinen wird ignoriert.
     //Bei nur mehr 2 Steinen übrig wird Gewinner ausfindig gemacht.
+    //Wenn keine Steine auf dem Feld lose sind (Steine, die in keiner Mühle drinnen sind, die einfach unterwegs sind),
+    //wird die Möglichkeit, Steine aus geschlossenen Mühlen zu nehmen gegeben.
     @FXML
     public void clickOnFieldToTake(ActionEvent av)
     {
@@ -116,6 +144,30 @@ public class ControllerGame implements Initializable
         int y = Integer.parseInt(iButton.getId().substring(2));
 
 
+        //Kontrollieren, ob's ee nicht der eigene Stein war, wenn nicht, dann soll der Stein genommen werden.
+        //Wenn beide noch nicht alle Steine gelegt haben, wieder zurück zu clickOnFieldToPlace.
+        //Wenn alles gesetzt wurde, zurück zu clickOnFieldToShowMoveableFields.
+        if (zisGame.getBoard().getField()[y][x] != zisGame.playercounter && zisGame.getBoard().checkForStone(x,y))
+        {
+            //Wenn Mühle zwar geschlossen ist, aber es sonst keine anderen Steine zum abheben gibt, darf man
+            //einfach Steine aus geschlossenen Mühlen nehmen.
+            if (!zisGame.checkIfMillClosed(x,y) || !zisGame.checkIfSingleStoneAvailable())
+            {
+                zisGame.takeStone(x, y);
+
+                zisGame.updatePlayerCounter();
+                updateButtons();
+                updateStatusbar();
+
+                if (zisGame.getPlayers()[0].getStones() > 0 || zisGame.getPlayers()[1].getStones() > 0)
+                {
+                    changeButtonAction("place");
+                } else
+                {
+                    changeButtonAction("move");
+                }
+            }
+        }
     }
 
 
@@ -129,7 +181,25 @@ public class ControllerGame implements Initializable
         int x = Integer.parseInt(iButton.getId().substring(0,1));
         int y = Integer.parseInt(iButton.getId().substring(2));
 
+        ArrayList<int[]> possibilitiesForMovement = zisGame.getBoard().getPossibilitiesForMovement(x, y);
 
+
+        resetButtonStyle();
+
+        if (zisGame.getBoard().checkForStone(x,y) && zisGame.getBoard().getField()[y][x] == zisGame.playercounter)
+        {
+            for (int[] ints : possibilitiesForMovement)
+            {
+                for (Button btn_gamebutton : btn_gamebuttons)
+                {
+                    if (btn_gamebutton.getId().substring(0, 1).equals(String.valueOf(ints[0])) &&
+                            btn_gamebutton.getId().substring(2).equals(String.valueOf(ints[1])))
+                    {
+                        btn_gamebutton.setBackground(new Background(new BackgroundFill(Color.TURQUOISE, null, null)));
+                    }
+                }
+            }
+        }
     }
 
 
@@ -145,7 +215,17 @@ public class ControllerGame implements Initializable
             {
                 if (zisGame.getBoard().getField()[i][j] != 7)
                 {
-                    btn_gamebuttons[btncounter].setText(String.valueOf(zisGame.getBoard().getField()[i][j]));
+                    if (zisGame.getBoard().getField()[i][j] == 1)
+                    {
+//                        btn_gamebuttons[btncounter].setText(String.valueOf(zisGame.getBoard().getField()[i][j]));
+                        btn_gamebuttons[btncounter].setText("☺");
+                    }else if (zisGame.getBoard().getField()[i][j] == 2)
+                    {
+                        btn_gamebuttons[btncounter].setText("☻");
+                    }
+                    else{
+                        btn_gamebuttons[btncounter].setText("○");
+                    }
                     btncounter++;
                 }
             }
@@ -155,7 +235,17 @@ public class ControllerGame implements Initializable
     //Aktualisiert die Statusbar unten. (Die Hbox, wo PlayerOne, PlayerTwo und Setzen/Bewegen drinnensteht.)
     public void updateStatusbar()
     {
-        
+        lbl_playerone.setText("Player1: "+zisGame.getPlayers()[0].getStones());
+        lbl_playertwo.setText("Player2: "+zisGame.getPlayers()[1].getStones());
+
+        if (zisGame.playercounter == 1)
+        {
+            lbl_playerone.setText("➤ "+lbl_playerone.getText());
+        }
+        else if (zisGame.playercounter == 2)
+        {
+            lbl_playertwo.setText("➤ "+lbl_playertwo.getText());
+        }
     }
 
 
@@ -169,7 +259,7 @@ public class ControllerGame implements Initializable
     //take      ->  clickOnFieldToTake()
     //(move)    ->  clickOnFieldToShowMoveableFields()
     //null      ->  null
-    public void buttonActionChanger(String action)
+    public void changeButtonAction(String action)
     {
         for (Button btn_gamebutton : btn_gamebuttons)
         {
@@ -181,10 +271,20 @@ public class ControllerGame implements Initializable
                 case "take":
                     btn_gamebutton.setOnAction(this::clickOnFieldToTake);
                     break;
+                case "move":
+                    btn_gamebutton.setOnAction(this::clickOnFieldToShowMoveableFields);
+                    break;
                 case "null":
                     btn_gamebutton.setOnAction(null);
                     break;
             }
+        }
+    }
+
+    public void resetButtonStyle(){
+        for (Button btn_gamebutton : btn_gamebuttons)
+        {
+            btn_gamebutton.setBackground(null);
         }
     }
 }
