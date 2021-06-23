@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,7 +14,7 @@
    <children>
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="1000.0">
          <children>
-            <GridPane fx:id="gp_field" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="500.0">
+            <GridPane fx:id="gp_field" hgap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" styleClass="gameboard" stylesheets="@../design/DesignGame.css" vgap="1.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -35,17 +36,20 @@
             </GridPane>
             <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="1000.0">
                <children>
-                  <Label fx:id="lbl_status" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" text="Status">
+                  <Label fx:id="lbl_status" alignment="BASELINE_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="500.0" text="Status">
+                     <font>
+                        <Font name="Consolas" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lbl_playerone" alignment="BASELINE_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" text="Player1: ">
                      <font>
                         <Font name="Consolas" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbl_playerone" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="400.0" text="Player1: ">
-                     <font>
-                        <Font name="Consolas" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lbl_playertwo" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="400.0" text="Player2: ">
+                  <Label fx:id="lbl_playertwo" alignment="BASELINE_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" text="Player2: ">
                      <font>
                         <Font name="Consolas" size="24.0" />
                      </font>

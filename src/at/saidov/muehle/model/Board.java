@@ -50,12 +50,16 @@ public class Board
         }
     }
 
+
+
     //Methode zum bewegen von Stein im Field.
     public void moveStone(int x1, int y1, int x2, int y2)
     {
         getField()[y2][x2] = getField()[y1][x1];
         getField()[y1][x1] = 0;
     }
+
+
 
     //Methode zum entnehmen von Stein vom Field.
     public void removeStone(int x, int y)
@@ -75,6 +79,8 @@ public class Board
         }
     }
 
+
+
     //Methode zum kontrollieren, ob Stein ins Field gesetzt werden darf.
     public boolean checkForSpace(int x, int y)
     {
@@ -88,6 +94,8 @@ public class Board
         return false;
     }
 
+
+
     //Methode zum kontrollieren, ob Stein vom Field genommen werden darf.
     public boolean checkForStone(int x, int y)
     {
@@ -100,6 +108,8 @@ public class Board
         }
         return false;
     }
+
+
 
     //Methode, die alle Möglichkeiten zum Bewegen eines Steins in einer ArrayList, in einzelnen
     //2 Dimensionalen Arrays zurück gibt.
@@ -115,14 +125,27 @@ public class Board
         {
             try
             {
-                if (getField()[y][x + i] != 7)
+                if (y != 3)
                 {
-                    if (getField()[y][x + i] == 0)
+                    if (getField()[y][x + i] != 7)
                     {
-                        possibilities.add(new int[]{x + i, y});
-                        break;
+                        if (getField()[y][x + i] == 0)
+                        {
+                            possibilities.add(new int[]{x + i, y});
+                            break;
+                        } else if (getField()[y][x + i] != 0)
+                        {
+                            break;
+                        }
                     }
-                    else if (getField()[y][x + i] != 0){
+                }else
+                {
+                    if (getField()[y][x+i] == 0)
+                    {
+                        possibilities.add(new int[] {x + i, y});
+                        break;
+                    } else if (getField()[y][x + i] != 0)
+                    {
                         break;
                     }
                 }
@@ -132,17 +155,33 @@ public class Board
             }
         }
 
+
+
         //Scan waagrecht nach links.
         for (int i = 1; i < FIELDSIZE; i++)
         {
             try{
-                if (getField()[y][x - i] != 7)
+                if (y != 3)
                 {
-                    if (getField()[y][x - i] == 0){
-                        possibilities.add(new int[]{x - i, y});
-                        break;
+                    if (getField()[y][x - i] != 7)
+                    {
+                        if (getField()[y][x - i] == 0)
+                        {
+                            possibilities.add(new int[]{x - i, y});
+                            break;
+                        } else if (getField()[y][x - i] != 0)
+                        {
+                            break;
+                        }
                     }
-                    else if (getField()[y][x - i] != 0){
+                }else
+                {
+                    if (getField()[y][x - i] == 0)
+                    {
+                        possibilities.add(new int[] {x - i, y});
+                        break;
+                    } else if (getField()[y][x - i] != 0)
+                    {
                         break;
                     }
                 }
@@ -152,18 +191,31 @@ public class Board
             }
         }
 
+
+
         //Scan senkrecht nach unten.
         for (int i = 1; i < FIELDSIZE; i++)
         {
             try{
-                if (getField()[y + i][x] != 7)
+                if (x != 3)
                 {
+                    if (getField()[y + i][x] != 7)
+                    {
+                        if (getField()[y + i][x] == 0)
+                        {
+                            possibilities.add(new int[]{x, y + i});
+                            break;
+                        } else if (getField()[y + i][x] != 0)
+                        {
+                            break;
+                        }
+                    }
+                }else {
                     if (getField()[y + i][x] == 0)
                     {
                         possibilities.add(new int[]{x, y + i});
                         break;
-                    }
-                    else if (getField()[y + i][x] != 0)
+                    } else if (getField()[y + i][x] != 0)
                     {
                         break;
                     }
@@ -174,18 +226,31 @@ public class Board
             }
         }
 
+
+
         //Scan senkrecht nach oben.
         for (int i = 1; i < FIELDSIZE; i++)
         {
             try{
-                if (getField()[y - i][x] != 7)
+                if (x != 3)
                 {
+                    if (getField()[y - i][x] != 7)
+                    {
+                        if (getField()[y - i][x] == 0)
+                        {
+                            possibilities.add(new int[]{x, y - i});
+                            break;
+                        } else if (getField()[y - i][x] != 0)
+                        {
+                            break;
+                        }
+                    }
+                }else{
                     if (getField()[y - i][x] == 0)
                     {
                         possibilities.add(new int[]{x, y - i});
                         break;
-                    }
-                    else if (getField()[y - i][x] != 0)
+                    } else if (getField()[y - i][x] != 0)
                     {
                         break;
                     }
@@ -298,18 +363,38 @@ public class Board
 //            reString += (i+1)+" | ";
             for (int j = 0; j < FIELDSIZE; j++)
             {
-                if (getField()[i][j] == 0)
-                {
-                    reString += (char)27+"[36m"+getField()[i][j] + "   ";
-                }else if (getField()[i][j] == 7) {
-                    reString += (char)27 + "[31m" +getField()[i][j] + "   ";
-                }else if (getField()[i][j] == 1) {
-                    reString += (char)27+"[34m"+getField()[i][j] + "   ";
-                }else if (getField()[i][j] == 2) {
-                    reString += (char)27+"[32m"+getField()[i][j] + "   ";
-                }else{
-                    reString += getField()[i][j] + " | ";
+                switch (getField()[i][j]){
+                    case 0:
+                        reString += (char)27+"[36m"+getField()[i][j] + "   ";
+                        break;
+                    case 7:
+                        reString += (char)27 + "[31m" +getField()[i][j] + "   ";
+                        break;
+                    case 1:
+                        reString += (char)27+"[34m"+getField()[i][j] + "   ";
+                        break;
+                    case 2:
+                        reString += (char)27+"[32m"+getField()[i][j] + "   ";
+                        break;
+                    default:
+                        reString += getField()[i][j] + " | ";
+                        break;
                 }
+//                if (getField()[i][j] == 0)
+//                {
+//                    reString += (char)27+"[36m"+getField()[i][j] + "   ";
+//                }else if (getField()[i][j] == 7)
+//                {
+//                    reString += (char)27 + "[31m" +getField()[i][j] + "   ";
+//                }else if (getField()[i][j] == 1)
+//                {
+//                    reString += (char)27+"[34m"+getField()[i][j] + "   ";
+//                }else if (getField()[i][j] == 2)
+//                {
+//                    reString += (char)27+"[32m"+getField()[i][j] + "   ";
+//                }else{
+//                    reString += getField()[i][j] + " | ";
+//                }
             }
             reString += (char)27+"[38m"+"\n";
         }

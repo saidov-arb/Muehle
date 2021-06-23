@@ -1,0 +1,9 @@
+.gameboard
+{
+    -fx-background-image: url("../media/Board_Img.png");
+}
+
+.button:hover
+{
+    -fx-border-color: #AABBCC;
+}

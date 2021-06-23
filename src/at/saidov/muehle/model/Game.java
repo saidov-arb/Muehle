@@ -202,20 +202,92 @@ public class Game
 
     public boolean checkIfSingleStoneAvailable()
     {
+        updatePlayerCounter();
         for (int i = 0; i < Board.FIELDSIZE; i++)
         {
             for (int j = 0; j < Board.FIELDSIZE; j++)
             {
                 if (getBoard().checkForStone(j,i))
                 {
-                    if (!checkIfMillClosed(j,i))
+                    if (getBoard().getField()[i][j] == playercounter)
                     {
-                        return true;
+                        if (!checkIfMillClosed(j, i))
+                        {
+                            updatePlayerCounter();
+                            return true;
+                        }
                     }
                 }
             }
         }
+        updatePlayerCounter();
         return false;
+    }
+
+    //Methode, die den Gewinner zurückgibt.
+    //Return Value 1 = PlayerOne has won.
+    //Return Value 2 = PlayerTwo has won.
+    public int checkForWinner()
+    {
+        int notMoveableCounter = 0;
+        int availableStones = 0;
+
+
+        //Kontrolle, ob Playerone Steine bewegen kann. Schleife und If müssen hintereinander sein.
+        for (int i = 0; i < Board.FIELDSIZE; i++)
+        {
+            for (int j = 0; j < Board.FIELDSIZE; j++)
+            {
+                if (getBoard().getField()[i][j] == 1)
+                {
+                    availableStones++;
+                    if (getBoard().getPossibilitiesForMovement(j,i).size() < 1)
+                    {
+                        notMoveableCounter++;
+                    }
+                }
+            }
+        }
+
+        //Zuerst Kontrolle, ob Steineanzahl unter 3 ist. Derjenige, der nur 2 Steine hat, hat verloren.
+        //Dann kontrolle, ob verfügbare Steine beweglich sind, oder nicht.
+        if (availableStones < 3)
+        {
+            return 2;
+        }
+        else if (availableStones == notMoveableCounter){
+            return 2;
+        }
+
+        availableStones = 0;
+        notMoveableCounter = 0;
+
+        for (int i = 0; i < Board.FIELDSIZE; i++)
+        {
+            for (int j = 0; j < Board.FIELDSIZE; j++)
+            {
+                if (getBoard().getField()[i][j] == 2)
+                {
+                    availableStones++;
+                    if (getBoard().getPossibilitiesForMovement(j,i).size() < 1)
+                    {
+                        notMoveableCounter++;
+                    }
+                }
+            }
+        }
+
+        //Zuerst Kontrolle, ob Steineanzahl unter 3 ist. Derjenige, der nur 2 Steine hat, hat verloren.
+        //Dann Kontrolle, ob verfügbare Steine beweglich sind, oder nicht.
+        if (availableStones < 3)
+        {
+            return 1;
+        }
+        if (availableStones == notMoveableCounter){
+            return 1;
+        }
+
+        return 0;
     }
 
 
