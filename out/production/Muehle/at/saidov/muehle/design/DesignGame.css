@@ -7,3 +7,8 @@
 {
     -fx-border-color: #AABBCC;
 }
+
+.lblrestart:hover
+{
+    -fx-border-color: #FF0000;
+}

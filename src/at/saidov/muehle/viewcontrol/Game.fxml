@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="1000" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.saidov.muehle.viewcontrol.ControllerGame">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="1000" stylesheets="@../design/DesignGame.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.saidov.muehle.viewcontrol.ControllerGame">
    <children>
-      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="1000.0">
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: lightgrey;">
          <children>
             <GridPane fx:id="gp_field" hgap="1.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" styleClass="gameboard" stylesheets="@../design/DesignGame.css" vgap="1.0">
               <columnConstraints>
@@ -36,7 +36,12 @@
             </GridPane>
             <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="1000.0">
                <children>
-                  <Label fx:id="lbl_status" alignment="BASELINE_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="500.0" text="Status">
+                  <Label fx:id="lbl_restart" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#restartGame" prefHeight="100.0" prefWidth="100.0" styleClass="lblrestart" stylesheets="@../design/DesignGame.css" text="⟳">
+                     <font>
+                        <Font name="Consolas" size="48.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_status" alignment="BASELINE_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="400.0" text="Status">
                      <font>
                         <Font name="Consolas" size="24.0" />
                      </font>
@@ -44,12 +49,12 @@
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lbl_playerone" alignment="BASELINE_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" text="Player1: ">
+                  <Label fx:id="lbl_playerone" alignment="BASELINE_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" text="Player ">
                      <font>
                         <Font name="Consolas" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbl_playertwo" alignment="BASELINE_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" text="Player2: ">
+                  <Label fx:id="lbl_playertwo" alignment="BASELINE_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" text="Player">
                      <font>
                         <Font name="Consolas" size="24.0" />
                      </font>

@@ -117,11 +117,13 @@ public class Game
     //Methode zum platzieren von Stein.
     public void placeStone(int x, int y)
     {
-        if (getBoard().checkForSpace(x,y)){
+        if (getBoard().checkForSpace(x,y))
+        {
             getBoard().setStone(x,y,playercounter);
             getPlayers()[playercounter-1].setStones(getPlayers()[playercounter-1].getStones()-1);
         }
-        else{
+        else
+        {
             System.out.println("Platzieren nicht erlaubt.");
         }
         System.out.println(toString());
@@ -130,11 +132,14 @@ public class Game
     //Methode zum entnehmen von Stein.
     public void takeStone(int x, int y)
     {
-        if (getBoard().checkForStone(x,y)){
+        if (getBoard().checkForStone(x,y))
+        {
             if (!checkIfMillClosed(x,y) || !checkIfSingleStoneAvailable())
             {
                 getBoard().removeStone(x, y);
-            }else {
+            }
+            else
+            {
                 System.out.println("Geschlossene Mühle kannst du nicht angreifen.");
             }
         }
@@ -145,7 +150,8 @@ public class Game
     public void moveStone(int x1, int y1, int x2, int y2)
     {
         ArrayList<int[]> possibilities = getBoard().getPossibilitiesForMovement(x1,y1);
-        if(possibilities.size() >= 1){
+        if(possibilities.size() >= 1)
+        {
             for (int[] possibility : possibilities)
             {
                 if (possibility[0] == x2 && possibility[1] == y2)
@@ -153,7 +159,9 @@ public class Game
                     getBoard().moveStone(x1, y1, x2, y2);
                 }
             }
-        }else{
+        }
+        else
+        {
             System.out.println("Verschieben nicht möglich.");
         }
         System.out.println(toString());
@@ -255,7 +263,8 @@ public class Game
         {
             return 2;
         }
-        else if (availableStones == notMoveableCounter){
+        else if (availableStones == notMoveableCounter)
+        {
             return 2;
         }
 
@@ -283,7 +292,8 @@ public class Game
         {
             return 1;
         }
-        if (availableStones == notMoveableCounter){
+        if (availableStones == notMoveableCounter)
+        {
             return 1;
         }
 
@@ -293,9 +303,12 @@ public class Game
 
     public void updatePlayerCounter()
     {
-        if (playercounter == 1) {
+        if (playercounter == 1)
+        {
             playercounter++;
-        } else if (playercounter == 2) {
+        }
+        else if (playercounter == 2)
+        {
             playercounter = 1;
         }
     }
