@@ -357,7 +357,7 @@ public class Board
     public String toString()
     {
 //        String reString = "\n0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n";
-        String reString = "\n";
+        StringBuilder reString = new StringBuilder("\n");
         for (int i = 0; i < FIELDSIZE; i++)
         {
 //            reString += (i+1)+" | ";
@@ -365,19 +365,19 @@ public class Board
             {
                 switch (getField()[i][j]){
                     case 0:
-                        reString += (char)27+"[36m"+getField()[i][j] + "   ";
+                        reString.append((char) 27 + "[36m").append(getField()[i][j]).append("   ");
                         break;
                     case 7:
-                        reString += (char)27 + "[31m" +getField()[i][j] + "   ";
+                        reString.append((char) 27 + "[31m").append(getField()[i][j]).append("   ");
                         break;
                     case 1:
-                        reString += (char)27+"[34m"+getField()[i][j] + "   ";
+                        reString.append((char) 27 + "[34m").append(getField()[i][j]).append("   ");
                         break;
                     case 2:
-                        reString += (char)27+"[32m"+getField()[i][j] + "   ";
+                        reString.append((char) 27 + "[32m").append(getField()[i][j]).append("   ");
                         break;
                     default:
-                        reString += getField()[i][j] + " | ";
+                        reString.append(getField()[i][j]).append(" | ");
                         break;
                 }
 //                if (getField()[i][j] == 0)
@@ -396,8 +396,8 @@ public class Board
 //                    reString += getField()[i][j] + " | ";
 //                }
             }
-            reString += (char)27+"[38m"+"\n";
+            reString.append((char) 27 + "[38m" + "\n");
         }
-        return reString;
+        return reString.toString();
     }
 }

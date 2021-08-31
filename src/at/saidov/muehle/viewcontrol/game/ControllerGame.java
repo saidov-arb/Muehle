@@ -1,4 +1,4 @@
-package at.saidov.muehle.viewcontrol;
+package at.saidov.muehle.viewcontrol.game;
 
 import at.saidov.muehle.model.*;
 import javafx.event.ActionEvent;
@@ -15,6 +15,14 @@ import java.util.ResourceBundle;
 
 public class ControllerGame implements Initializable
 {
+    /**♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦
+     * Autor: Arbi Saidov
+     * Datum: 21.06.2021
+     * Beschreibung: Controller Klasse für Game.
+     *          Möge Gott mir beistehen.
+     ♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦♦*/
+
+
     @FXML GridPane gp_field;
     @FXML Label lbl_status,lbl_playerone,lbl_playertwo,lbl_restart;
     Button[] btn_gamebuttons;
@@ -175,13 +183,13 @@ public class ControllerGame implements Initializable
             }
         }
         else if (!zisGame.getBoard().checkForStone(x,y) && possibilitiesForButtonToMove != null) {
-            System.out.println("Bin da. im else if.");
+//            System.out.println("Bin da. im else if.");
 
             for (int i = 0; i < possibilitiesForButtonToMove.size(); i++) {
-                System.out.println("Bin da. im for.");
+//                System.out.println("Bin da. im for.");
 
                 if (possibilitiesForButtonToMove.get(i)[0] == x && possibilitiesForButtonToMove.get(i)[1] == y) {
-                    System.out.println("Bin da. im if.");
+//                    System.out.println("Bin da. im if.");
                     zisGame.moveStone(Integer.parseInt(buttonToMove.getId().substring(0,1)),Integer.parseInt(buttonToMove.getId().substring(2)),x,y);
 
                     //Wenn gerade eine Mühle geschlossen wurde, soll der Spieler die Rechte kriegen, einen Stein vom
